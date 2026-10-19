@@ -141,4 +141,48 @@ class EmpleadoTest {
         assertEquals(2060.0f,
                 empleado.calculoNominaBruta(TipoEmpleado.VENDEDOR, 0, 2));
     }
+    
+    // CASO NEGATIVO 1: TIPO DE EMPLEADO NO VALIDO
+
+    @Test
+    void testTipoEmpleadoNulo() {
+        Empleado empleado = new Empleado();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            empleado.calculoNominaBruta(null, 1000, 2);
+        });
+    }
+
+    // CASO NEGATIVO 2: VENTAS NEGATIVAS
+
+    @Test
+    void testVentasNegativas() {
+        Empleado empleado = new Empleado();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            empleado.calculoNominaBruta(TipoEmpleado.VENDEDOR, -1, 2);
+        });
+    }
+
+    // CASO NEGATIVO 3: HORAS EXTRAS NEGATIVAS
+
+    @Test
+    void testHorasExtraNegativas() {
+        Empleado empleado = new Empleado();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            empleado.calculoNominaBruta(TipoEmpleado.VENDEDOR, 1000, -1);
+        });
+    }
+
+    // CASO NEGATIVO 4: NOMINA BRUTA NEGATIVA
+
+    @Test
+    void testNominaBrutaNegativa() {
+        Empleado empleado = new Empleado();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            empleado.calculoNominaNeta(-1);
+        });
+    }
 }
